@@ -5,10 +5,14 @@ import HelloWorld from './components/HelloWorld.vue'
 import { AzureClient } from '@fluidframework/azure-client'
 import { SampleTokenProvider } from './SampleTokenProvider'
 import { SharedMap } from 'fluid-framework'
+import { onMounted } from 'vue'
 
+onMounted(async () => {
 const fluidRelayClient = new AzureClient({ connection: { orderer: '', storage: '',tenantId: '', tokenProvider: new SampleTokenProvider({ userId: 'test'})  }})
 const fluidConnection = await fluidRelayClient.createContainer({ initialObjects: { props: SharedMap, objects: SharedMap } })
 const id = await fluidConnection.container.attach()
+})
+
 
 </script>
 
